@@ -6,9 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RestaurantorApplication {
 
 	// TODO
-	// Connect to mongo instance
-	// -Save sensitive data as encrypted config?
-	// -Save general config as plain .yaml file
 	// Create Entity model for data
 	// Create processor to convert response into entity?
 	// Create endpoints for displaying data
