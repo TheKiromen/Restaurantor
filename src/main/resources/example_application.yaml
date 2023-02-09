@@ -1,0 +1,7 @@
+spring:
+  data:
+    mongodb:
+      uri: "<Your Connection String to MongoDB instance>"
+#      Usually looks like this: mongodb+srv://<Username>:<Password>@<Cluster>.zykua.mongodb.net
+
+      database: "<Your Database Name>"
