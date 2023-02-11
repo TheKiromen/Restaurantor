@@ -4,6 +4,7 @@ import com.dkrucze.Restaurantor.Model.Restaurant;
 import com.dkrucze.Restaurantor.Repository.RestaurantRepository;
 import com.dkrucze.Restaurantor.Service.Signature.RestaurantService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +15,14 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
 
-    public List<Restaurant> getAllRestaurants() {
-        return restaurantRepository.findAll();
+    public List<Restaurant> getRestaurantByName(String name) {
+        return restaurantRepository.findByName(name);
     }
+
+    @Override
+    public List<Restaurant> getAllRestaurants(int page) {
+        return restaurantRepository.findAllRestaurants(PageRequest.of(page,20)).get().toList();
+    }
+
+
 }

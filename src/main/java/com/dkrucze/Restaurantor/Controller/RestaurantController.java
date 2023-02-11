@@ -4,9 +4,7 @@ import com.dkrucze.Restaurantor.Model.Restaurant;
 import com.dkrucze.Restaurantor.Service.Implementation.RestaurantServiceImpl;
 import com.dkrucze.Restaurantor.Service.Signature.RestaurantService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,8 +18,13 @@ public class RestaurantController {
         restaurantService = rsi;
     }
 
+    @GetMapping("/{name}")
+    public ResponseEntity<List<Restaurant>> getRestaurantByName(@PathVariable String name){
+        return ResponseEntity.ok(restaurantService.getRestaurantByName(name));
+    }
+
     @GetMapping("/")
-    public ResponseEntity<List<Restaurant>> getAllRestaurants(){
-        return ResponseEntity.ok(restaurantService.getAllRestaurants());
+    public ResponseEntity<List<Restaurant>> getRestaurantByName(@RequestParam int page){
+        return ResponseEntity.ok(restaurantService.getAllRestaurants(page));
     }
 }
