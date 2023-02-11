@@ -8,6 +8,10 @@ target/
 data/*.json
 data/*.csv
 
+### Sensitive Data ###
+src/main/resources/application.yaml
+src/main/resources/application.yml
+
 ### STS ###
 .apt_generated
 .classpath
