@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
-// @Document("Test")
 @Document("restaurants")
 public class Restaurant {
     @Id
@@ -15,4 +14,8 @@ public class Restaurant {
     private String id;
     @Field(name="name")
     private String name;
+
+    public Restaurant(String name) {
+        this.name = name;
+    }
 }

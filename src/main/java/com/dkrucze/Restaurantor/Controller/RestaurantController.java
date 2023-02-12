@@ -18,13 +18,13 @@ public class RestaurantController {
         restaurantService = rsi;
     }
 
-    @GetMapping("/{name}")
-    public ResponseEntity<List<Restaurant>> getRestaurantByName(@PathVariable String name){
-        return ResponseEntity.ok(restaurantService.getRestaurantByName(name));
+    @GetMapping("/")
+    public ResponseEntity<List<Restaurant>> getAllRestaurants(@RequestParam(defaultValue = "0") int page){
+        return ResponseEntity.ok(restaurantService.getAllRestaurants(page));
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<Restaurant>> getRestaurantByName(@RequestParam int page){
-        return ResponseEntity.ok(restaurantService.getAllRestaurants(page));
+    @GetMapping("/{name}")
+    public ResponseEntity<List<Restaurant>> getRestaurantsByName(@PathVariable String name){
+        return ResponseEntity.ok(restaurantService.getRestaurantByName(name));
     }
 }

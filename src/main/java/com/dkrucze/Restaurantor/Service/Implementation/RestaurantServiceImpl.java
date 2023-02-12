@@ -15,13 +15,13 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
 
-    public List<Restaurant> getRestaurantByName(String name) {
-        return restaurantRepository.findByName(name);
-    }
-
     @Override
     public List<Restaurant> getAllRestaurants(int page) {
         return restaurantRepository.findAllRestaurants(PageRequest.of(page,20)).get().toList();
+    }
+
+    public List<Restaurant> getRestaurantByName(String name) {
+        return restaurantRepository.findByName(name);
     }
 
 
