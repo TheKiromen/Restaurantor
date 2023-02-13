@@ -62,7 +62,7 @@ class RestaurantControllerTest {
         expected.add(new Restaurant("Restaurant 5"));
         expected.add(new Restaurant("Restaurant 5"));
         //Copy expected value to avoid list modification
-        BDDMockito.given(restaurantService.getRestaurantByName("Restaurant 5")).willReturn(new LinkedList<>(expected));
+        BDDMockito.given(restaurantService.getRestaurantsByName("Restaurant 5")).willReturn(new LinkedList<>(expected));
 
         //When
         MockHttpServletResponse actual = mvc.perform(get("/api/restaurants/Restaurant 5")).andReturn().getResponse();

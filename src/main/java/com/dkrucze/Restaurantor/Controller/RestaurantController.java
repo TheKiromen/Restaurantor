@@ -25,6 +25,6 @@ public class RestaurantController {
 
     @GetMapping("/{name}")
     public ResponseEntity<List<Restaurant>> getRestaurantsByName(@PathVariable String name){
-        return ResponseEntity.ok(restaurantService.getRestaurantByName(name));
+        return ResponseEntity.ok(restaurantService.getRestaurantsByName(name));
     }
 }

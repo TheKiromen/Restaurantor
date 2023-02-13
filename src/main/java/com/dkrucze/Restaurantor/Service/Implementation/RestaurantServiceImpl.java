@@ -20,7 +20,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurantRepository.findAllRestaurants(PageRequest.of(page,20)).get().toList();
     }
 
-    public List<Restaurant> getRestaurantByName(String name) {
+    public List<Restaurant> getRestaurantsByName(String name) {
         return restaurantRepository.findByName(name);
     }
 
