@@ -11,12 +11,16 @@ import java.util.List;
 
 public interface RestaurantRepository extends MongoRepository<Restaurant, String> {
 
-    // Same result as query below
-    // @Query(value = "{'name':?0}")
+    //Same result as query below
+    //@Query(value = "{'name':?0}")
     List<Restaurant> findByName(String name);
 
     //Basically just findAll but pageable
     @Query(value = "{}")
     Page<Restaurant> findAllRestaurants(Pageable pageable);
+
+    //Find specific instance of Restaurant
+    @Query(value = "{'restaurant_id' : ?0}")
+    Restaurant findByRestaurant_id(String restaurant_id);
 
 }

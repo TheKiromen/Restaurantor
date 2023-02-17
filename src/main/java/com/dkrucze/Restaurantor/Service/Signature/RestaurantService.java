@@ -11,4 +11,6 @@ public interface RestaurantService {
     List<Restaurant> getAllRestaurants(int page);
 
     List<Restaurant> getRestaurantsByName(String name);
+
+    Restaurant getRestaurantByID(String id);
 }

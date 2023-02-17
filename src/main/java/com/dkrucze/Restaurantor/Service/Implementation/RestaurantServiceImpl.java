@@ -20,8 +20,14 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurantRepository.findAllRestaurants(PageRequest.of(page,20)).get().toList();
     }
 
+    @Override
     public List<Restaurant> getRestaurantsByName(String name) {
         return restaurantRepository.findByName(name);
+    }
+
+    @Override
+    public Restaurant getRestaurantByID(String id) {
+        return restaurantRepository.findByRestaurant_id(id);
     }
 
 

@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.LinkedList;
 
@@ -12,15 +13,15 @@ import java.util.LinkedList;
 public class Restaurant {
     @Id
     @Indexed
-    private String id;
+    @Field(name = "_id")
+    private String object_id;
+    @Indexed(unique = true)
+    private String restaurant_id;
     private String name;
     private String cuisine;
     private String borough;
     private Address address;
     private LinkedList<Grade> grades;
-    //Not used at the moment, good for querying for specific Restaurant?
-    //@Indexed
-    //private String restaurant_id;
 
     //Constructor for test Restaurant instances
     public Restaurant(String name) {

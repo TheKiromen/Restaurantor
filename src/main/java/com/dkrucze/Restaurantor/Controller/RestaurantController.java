@@ -18,13 +18,29 @@ public class RestaurantController {
         restaurantService = rsi;
     }
 
+    //Return 20 most recent restaurants by default
     @GetMapping("/")
+    public ResponseEntity<List<Restaurant>> getDefaultEndpoint(){
+        return getAllRestaurants(0);
+    }
+
+    //Browse all the existing restaurants
+    @GetMapping(value = "/", params = "page")
     public ResponseEntity<List<Restaurant>> getAllRestaurants(@RequestParam(defaultValue = "0") int page){
         return ResponseEntity.ok(restaurantService.getAllRestaurants(page));
     }
 
+    //Query for a specific restaurant
+    @GetMapping(value = "/", params = "id")
+    public ResponseEntity<Restaurant> getRestaurantByID(@RequestParam(defaultValue = "") String id){
+        return ResponseEntity.ok(restaurantService.getRestaurantByID(id));
+    }
+
+    //Find all restaurants matching given name
     @GetMapping("/{name}")
     public ResponseEntity<List<Restaurant>> getRestaurantsByName(@PathVariable String name){
         return ResponseEntity.ok(restaurantService.getRestaurantsByName(name));
     }
+
+
 }
