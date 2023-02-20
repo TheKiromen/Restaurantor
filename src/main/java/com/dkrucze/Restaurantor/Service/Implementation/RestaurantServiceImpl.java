@@ -1,6 +1,7 @@
 package com.dkrucze.Restaurantor.Service.Implementation;
 
 import com.dkrucze.Restaurantor.Model.Restaurant;
+import com.dkrucze.Restaurantor.Model.RestaurantNear;
 import com.dkrucze.Restaurantor.Repository.RestaurantRepository;
 import com.dkrucze.Restaurantor.Service.Signature.RestaurantService;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,11 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Restaurant getRestaurantByID(String id) {
         return restaurantRepository.findByRestaurant_id(id);
+    }
+
+    @Override
+    public List<RestaurantNear> getRestaurantsNear(double latitude, double longitude, int maxDistance, int page) {
+        return restaurantRepository.findNearestRestaurants(latitude, longitude, maxDistance, PageRequest.of(page, 20));
     }
 
 

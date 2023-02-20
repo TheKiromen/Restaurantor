@@ -1,8 +1,10 @@
 package com.dkrucze.Restaurantor.Repository;
 
 import com.dkrucze.Restaurantor.Model.Restaurant;
+import com.dkrucze.Restaurantor.Model.RestaurantNear;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -23,26 +25,21 @@ public interface RestaurantRepository extends MongoRepository<Restaurant, String
     @Query(value = "{'restaurant_id' : ?0}")
     Restaurant findByRestaurant_id(String restaurant_id);
 
-//TMP Query Finds all restaurants near specified point matching set distance
-// db.restaurants.find({
-//   'address.coord':{
-//     $near:{
-//       $geometry: {type: "Point", coordinates: [-73.9667, 40.78]},
-//       $minDistance: 0,
-//       $maxDistance: 1000
-//     }
-//   }
-// })
-
-//TMP Query Finds all distances from given point
-// TODO Add sorting by distance, maxDistance as parameter, results paginated
-// db.restaurants.aggregate([{
-//   $geoNear: {
-//     near: { type: "Point", coordinates: [ -73.99279 , 40.719296 ] },
-//     distanceField: "distance",
-//     spherical: true
-//   }
-// }])
-
+    //Find all restaurants that are no further than maxDistance.
+    //Distance is represented as meters, location uses geographical coordinates.
+    @Aggregation(pipeline = {
+            "{$geoNear:{" +
+                    "near:{" +
+                        "type: 'Point'," +
+                        "'coordinates': [?0, ?1]" +
+                        "}," +
+                    "distanceField:'distance'," +
+                    "maxDistance:?2," +
+                    "spherical:true" +
+                "}" +
+            "}",
+            "{$sort: {'distance':1}}"
+    })
+    List<RestaurantNear> findNearestRestaurants(double latitude, double longitude, int maxDistance, Pageable pageable);
 
 }

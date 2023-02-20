@@ -1,6 +1,7 @@
 package com.dkrucze.Restaurantor.Controller;
 
 import com.dkrucze.Restaurantor.Model.Restaurant;
+import com.dkrucze.Restaurantor.Model.RestaurantNear;
 import com.dkrucze.Restaurantor.Service.Implementation.RestaurantServiceImpl;
 import com.dkrucze.Restaurantor.Service.Signature.RestaurantService;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,17 @@ public class RestaurantController {
     @GetMapping("/{name}")
     public ResponseEntity<List<Restaurant>> getRestaurantsByName(@PathVariable String name){
         return ResponseEntity.ok(restaurantService.getRestaurantsByName(name));
+    }
+
+    //Find all restaurants close to the given point, default proximity is 1 km.
+    @GetMapping(value = "/near")
+    public ResponseEntity<List<RestaurantNear>> findNearestRestaurants(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "1000") int maxDistance,
+            @RequestParam double latitude,
+            @RequestParam double longitude
+    ){
+        return ResponseEntity.ok(restaurantService.getRestaurantsNear(latitude,longitude, maxDistance, page));
     }
 
 

@@ -1,6 +1,7 @@
 package com.dkrucze.Restaurantor.Service.Signature;
 
 import com.dkrucze.Restaurantor.Model.Restaurant;
+import com.dkrucze.Restaurantor.Model.RestaurantNear;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface RestaurantService {
     List<Restaurant> getRestaurantsByName(String name);
 
     Restaurant getRestaurantByID(String id);
+
+    List<RestaurantNear> getRestaurantsNear(double latitude, double longitude, int maxDistance, int page);
 }
